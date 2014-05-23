@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+<h3> Hi {{user.username}}, You are playing against {{opponent.username}}</h3>
+<h2> Your Moves </h2>
+<ul>
+{% for m in player_moves%}
+	<li> X: {{m.x}} Y: {{m.y}} 
+		{% if m.hit %}
+			Hit!  </li>
+		{% else %}
+			Missed... </li>
+		{% endif %}
+{% endfor %}
+</ul>
+<h2> Your Ships</h2>
+<ul>
+{% for s in player_ships%}
+	<li> X: {{s.x}} Y: {{s.y}}
+		{% if s.hit %}
+			Sunk  </li>
+		{% else %}
+			Alive </li>
+		{% endif %}
+{% endfor %}
+</ul>
+<h2> Opponent's Moves </h2>
+<ul>
+{% for m in opponent_moves%}
+	<li> X: {{m.x}} Y: {{m.y}}
+		{% if m.hit %}
+			Hit!  </li>
+		{% else %}
+			Missed... </li>
+		{% endif %}
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+	<h2>
+		BattleShip!
+	</h2>
+	{% if not user %}
+    	<a href="{{ url_for('login') }}">Log In</a>
+    	<a href="{{ url_for('register') }}">Register</a>
+  	{% else %}
+  		<h2>Welcome {{user.username}}</h2>
+    	<a href="{{ url_for('logout') }}">Log Out</a><br>
+    	<a href="{{ url_for('list_game') }}">Your Games</a><br>
+    	<a href="{{ url_for('challenge') }}">Challenge Someone</a><br>
+    	{% if challenger_data %}
+    		<h3>Challengers</h3>
+    		<ul>
+    		{% for c in challenger_data %}
+				<li>{{c[1]}} <a href="{{url_for('accept',c_id = c[0])}}">Accept</a> </li>
+			{% endfor %}
+			</ul>
+		{% else %}
+		<h3>You have no challengers</h3>
+		{% endif %}
+  	{% endif %}
+
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	  <h3>System Message</h3>
+	    <ul class=flashes>
+	    {% for message in messages %}
+	      <li>{{ message }}</li>
+	    {% endfor %}
+	    </ul>
+	  {% endif %}
+	{% endwith %}
+</div>
+{% endblock %}

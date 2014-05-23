@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+{% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+{% endif %}
+
+
+{% from "_formhelpers.html" import render_field %}
+<form method=post action="/create_game/{{g_id}}">
+  <dl>
+    {{ render_field(form.ship1x) }}
+    {{ render_field(form.ship1y) }}
+    {{ render_field(form.ship2x) }}
+    {{ render_field(form.ship2y) }}
+    {{ render_field(form.ship3x) }}
+    {{ render_field(form.ship3y) }}
+  </dl>
+  <p><input type=submit value='Accept'>
+</form>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% endblock %}

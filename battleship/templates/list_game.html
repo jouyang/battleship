@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+	<h2>
+		This is the Game Page
+	</h2>
+  		<h2>Welcome {{user.username}}</h2>
+
+  	<h3>Opponents</h3>
+  	{% for d in opponents_data %}
+  	<ul>
+  		<li><a href= "{{url_for('game',g_id=d[1])}}">You VS {{d[0]}}</a></li>
+  	</ul>
+  	{% endfor %}
+  	<h3>Challengers</h3>
+  	{% for d in challengers_data %}
+  	<ul>
+  		<li><a href= "{{url_for('game',g_id=d[1])}}">{{d[0]}} VS You</a></li>
+  	</ul>
+  	{% endfor %}
+</div>
+{% endblock %}
